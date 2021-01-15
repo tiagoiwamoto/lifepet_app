@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:lifepet_app/models/pet_model.dart';
+import 'package:lifepet_app/screens/form_pet_screen.dart';
 
 class HomeScreen extends StatelessWidget {
 
@@ -15,7 +16,11 @@ class HomeScreen extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => FormPetScreen()),
+            );
+          },
           label: Text("Cadastrar"),
           icon: Icon(Icons.pets),
           backgroundColor: Colors.redAccent),
