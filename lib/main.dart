@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lifepet_app/models/pet_model.dart';
 import 'package:lifepet_app/screens/home_screen.dart';
 
 void main() => runApp(Main());
