@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:lifepet_app/models/pet_model.dart';
+import 'package:lifepet_app/screens/home_screen.dart';
+import 'package:lifepet_app/services/pet_service.dart';
 
 class FormPetScreen extends StatefulWidget {
 
@@ -8,9 +11,14 @@ class FormPetScreen extends StatefulWidget {
 }
 
 class _FormPetScreenState extends State<FormPetScreen> {
- 
+
+  PetService service = PetService();
   String tmpCorPet = 'Branco';
   String tmpSexoPet = 'Macho';
+  final _nomeController = TextEditingController();
+  final _bioController = TextEditingController();
+  final _idadeController = TextEditingController();
+  final _descricaoController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +34,17 @@ class _FormPetScreenState extends State<FormPetScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 TextFormField(
+                  controller: _nomeController,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(labelText: "Nome do pet"),
                 ),
                 TextFormField(
+                  controller: _bioController,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(labelText: "Bio"),
                 ),
                 TextFormField(
+                  controller: _idadeController,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(labelText: "Idade"),
                 ),
@@ -53,6 +64,7 @@ class _FormPetScreenState extends State<FormPetScreen> {
                   }).toList(),
                 ),
                 TextFormField(
+                  controller: _descricaoController,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(labelText: "Descrição"),
                 ),
@@ -77,7 +89,22 @@ class _FormPetScreenState extends State<FormPetScreen> {
                     height: 40,
                     width: double.infinity,
                     child: RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Pet newPet = Pet(
+                          nome: _nomeController.text,
+                          bio: _bioController.text,
+                          idade: int.parse(_idadeController.text),
+                          sexo: tmpSexoPet,
+                          descricao: _descricaoController.text,
+                          cor: tmpCorPet
+                        );
+                        service.addPet(newPet);
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (_) => HomeScreen()
+                          ),
+                        );
+                      },
                       color: Colors.redAccent,
                       child: Text("Cadastrar", style: TextStyle(color: Colors.white, fontSize: 16)),
                     ),
