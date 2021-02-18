@@ -66,4 +66,8 @@ class PetService {
       id: Random().nextInt(100).toString()
     ));
   }
+
+  Pet getPet(String id){
+    return _petList.singleWhere((pet) {return pet.id == id;});
+  }
 }
