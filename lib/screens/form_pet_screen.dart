@@ -6,13 +6,19 @@ import 'package:lifepet_app/services/pet_service.dart';
 
 class FormPetScreen extends StatefulWidget {
 
+  String id;
+
+  FormPetScreen({this.id});
+
   @override
   _FormPetScreenState createState() => _FormPetScreenState();
+
 }
 
 class _FormPetScreenState extends State<FormPetScreen> {
 
   PetService service = PetService();
+  Pet pet;
   String tmpCorPet = 'Branco';
   String tmpSexoPet = 'Macho';
   final _nomeController = TextEditingController();
@@ -21,10 +27,27 @@ class _FormPetScreenState extends State<FormPetScreen> {
   final _descricaoController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    if(widget.id != null) {
+      _getPet(widget.id);
+    }
+    if (pet != null) {
+      _nomeController.text = pet.nome;
+      _bioController.text = pet.bio;
+      _idadeController.text = pet.idade.toString();
+      tmpSexoPet = pet.sexo;
+      _descricaoController.text = pet.descricao;
+      tmpCorPet = pet.cor;
+    }
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Cadastro do pet"),
+        title: Text(pet != null ? "Edição do pet" : "Cadastro do pet"),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -98,7 +121,11 @@ class _FormPetScreenState extends State<FormPetScreen> {
                           descricao: _descricaoController.text,
                           cor: tmpCorPet
                         );
-                        service.addPet(newPet);
+                        if (pet != null) {
+                          service.editPet(pet.id, newPet);
+                        }else{
+                          service.addPet(newPet);
+                        }
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
                             builder: (_) => HomeScreen()
@@ -106,7 +133,7 @@ class _FormPetScreenState extends State<FormPetScreen> {
                         );
                       },
                       color: Colors.redAccent,
-                      child: Text("Cadastrar", style: TextStyle(color: Colors.white, fontSize: 16)),
+                      child: Text("Salvar", style: TextStyle(color: Colors.white, fontSize: 16)),
                     ),
                   ),
                 )
@@ -116,5 +143,9 @@ class _FormPetScreenState extends State<FormPetScreen> {
         ),
       ),
     );
+  }
+
+  _getPet(String id){
+    pet = service.getPet(id);
   }
 }
