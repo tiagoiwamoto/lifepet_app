@@ -21,33 +21,6 @@ class PetService {
         cor: "Branco",
         bio: "Cachorra muito ciumento",
         id: "1"));
-    _petList.add(Pet(
-        nome: "Mika",
-        imageUrl: "assets/images/mika.jpg",
-        descricao: "Cachorro york",
-        idade: 3,
-        sexo: "Femea",
-        cor: "Branco",
-        bio: "Cachorro muito levada",
-        id: "2"));
-    _petList.add(Pet(
-        nome: "Thor Tornado",
-        imageUrl: "assets/images/thor.jpg",
-        descricao: "Cachorro da laiz e luis",
-        idade: 1,
-        sexo: "Macho",
-        cor: "Cinza",
-        bio: "Cachorro muito brabo",
-        id: "3"));
-    _petList.add(Pet(
-        nome: "Melissa Manuela",
-        imageUrl: "assets/images/melissa.jpg",
-        descricao: "Cachorra da Rose",
-        idade: 5,
-        sexo: "Femea",
-        cor: "Branco",
-        bio: "Cachorra muito mimada",
-        id: "4"));
   }
 
   List getAllPets(){
