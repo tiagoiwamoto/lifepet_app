@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lifepet_app/models/pet_model.dart';
+import 'package:lifepet_app/screens/pet/consulta_screen.dart';
 import 'package:lifepet_app/screens/pet/perfil_pet_screen.dart';
 import 'package:lifepet_app/screens/pet/remedio_screen.dart';
 
@@ -99,6 +100,11 @@ class _CustomNavbarState extends State<CustomNavbar> {
                     setState(() {
                       widget.paginaAberta = 2;
                     });
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (_) => ConsultaScreen(id: widget.pet.id),
+                      ),
+                    );
                   },
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

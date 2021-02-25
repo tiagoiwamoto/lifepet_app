@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lifepet_app/models/pet_model.dart';
-import 'package:lifepet_app/models/remedio_model.dart';
+import 'package:lifepet_app/models/pet_remedio_model.dart';
 import 'package:lifepet_app/screens/pet/remedio_screen.dart';
 import 'package:lifepet_app/services/pet_service.dart';
 import 'package:lifepet_app/services/remedio_service.dart';
