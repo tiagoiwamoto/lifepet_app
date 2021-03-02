@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lifepet_app/models/pet_consulta_model.dart';
 import 'package:lifepet_app/models/pet_model.dart';
-import 'package:lifepet_app/screens/home_screen.dart';
+import 'package:lifepet_app/screens/pet/form_consulta_screen.dart';
 import 'package:lifepet_app/services/pet_consulta_service.dart';
 import 'package:lifepet_app/services/pet_service.dart';
-import 'package:lifepet_app/widgets/custom_navbar.dart';
-import 'package:lifepet_app/widgets/pet_text_style.dart';
 import 'package:lifepet_app/widgets/back_home.dart';
+import 'package:lifepet_app/widgets/custom_navbar.dart';
 import 'package:lifepet_app/widgets/hero_builder.dart';
+import 'package:lifepet_app/widgets/pet_text_style.dart';
 
 class ConsultaScreen extends StatelessWidget {
   final String id;
@@ -54,7 +54,7 @@ class ConsultaScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (_) => HomeScreen()),
+            MaterialPageRoute(builder: (_) => FormConsultaPetScreen(id: pet.id)),
           );
         },
         child: Icon(
