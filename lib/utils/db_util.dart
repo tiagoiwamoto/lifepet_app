@@ -5,8 +5,8 @@ import 'package:sqflite/sqflite.dart' as sql;
 class DbUtil {
   static Future<sql.Database> database() async {
     final dbPath = await sql.getDatabasesPath();
-    return sql.openDatabase(
-      path.join(dbPath, 'pets.db'),
+    String nPath = path.join(dbPath, 'pets');
+    return sql.openDatabase(nPath,
       onCreate: (db, version) {
         _createDb(db);
       },
@@ -16,8 +16,8 @@ class DbUtil {
 
   static void _createDb(sql.Database db){
     db.execute("""
-      CREATE TABLE pets (
-        id INTEGER PRIMARY KEY AUTO INCREMENT,
+      CREATE TABLE IF NOT EXISTS pets (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         nome VARCHAR(50),
         imageUrl TEXT,
         descricao TEXT,
@@ -25,16 +25,20 @@ class DbUtil {
         sexo VARCHAR(8),
         cor VARCHAR(20),
         bio TEXT)
-      )
     """);
   }
 
   static Future<void> insertDate(String table, Map<String, Object> dados) async {
     final db = await database();
-    await db.insert(
+    print(await db.insert(
         table,
         dados,
-        conflictAlgorithm: sql.ConflictAlgorithm.replace
-    );
+        conflictAlgorithm: sql.ConflictAlgorithm.replace));
+
+  }
+
+  static Future<List<Map<String, dynamic>>> getData(String table) async {
+    final db = await database();
+    return await db.query(table);
   }
 }
