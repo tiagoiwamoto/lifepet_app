@@ -15,7 +15,7 @@ class PetCard extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
             MaterialPageRoute(
-                builder: (_) => PerfilPetScreen(id: pet.id.toString())
+                builder: (_) => PerfilPetScreen(id: pet.id)
             )
         );
       },

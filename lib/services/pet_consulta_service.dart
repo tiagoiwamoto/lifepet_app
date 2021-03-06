@@ -8,21 +8,6 @@ class PetConsultaService{
   final List<PetConsulta> _consultas = [];
   final PetService petService = PetService();
 
-  static final PetConsultaService _singleton = PetConsultaService._internal();
-
-  factory PetConsultaService(){
-    return _singleton;
-  }
-
-  PetConsultaService._internal(){
-    _consultas.add(PetConsulta(
-      id: "1001",
-      nome: "Consulta A",
-      descricao: "Teste",
-      pet: petService.getPet("1")
-    ));
-  }
-
   List<PetConsulta> getConsultasPet(String id){
     return _consultas.where((element) => element.pet.id == id).toList();
   }

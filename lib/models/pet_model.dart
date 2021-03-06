@@ -17,13 +17,24 @@ class Pet {
     return {
       'id': id,
       'nome': nome,
-      'imageUrl': imageUrl,
+      'imageUrl': 'assets/images/no-image.png',
       'descricao': descricao,
       'idade': idade,
       'sexo': sexo,
       'cor': cor,
       'bio': bio
     };
+  }
+
+  Pet.fromMap(Map map){
+    id = map['id'];
+    nome = map['nome'];
+    imageUrl = map['imageUrl'];
+    descricao = map['descricao'];
+    idade = map['idade'];
+    cor = map['cor'];
+    sexo = map['sexo'];
+    bio = map['bio'];
   }
 
   @override

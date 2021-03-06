@@ -75,6 +75,6 @@ class FormRemedioPetScreen extends StatelessWidget {
   }
 
   _getPet(String id){
-    pet = petService.getPet(id);
+    // pet = petService.getPet(id);
   }
 }

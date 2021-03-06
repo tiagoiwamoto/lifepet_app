@@ -68,7 +68,7 @@ class ConsultaScreen extends StatelessWidget {
   }
 
   void _getPet(String id) {
-    pet = petService.getPet(id);
+    // pet = petService.getPet(id);
   }
 
   void _getConsultas(String id) {
