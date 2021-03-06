@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lifepet_app/models/pet_anotacao.dart';
 import 'package:lifepet_app/models/pet_model.dart';
-import 'package:lifepet_app/screens/pet/anotacao_screen.dart';
+import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/pet/anotacao_pet/anotacao_screen.dart';
 import 'package:lifepet_app/services/pet_anotacao_service.dart';
 import 'package:lifepet_app/services/pet_service.dart';
-import 'package:lifepet_app/widgets/app_bar_widget.dart';
+import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/components/app_bar_widget.dart';
 
 class FormAnotacaoScreen extends StatelessWidget {
 
@@ -56,7 +56,7 @@ class FormAnotacaoScreen extends StatelessWidget {
                         petAnotacaoService.saveAnotacao(novaAnotacao);
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
-                              builder: (_) => AnotacaoScreen(id: pet.id)
+                              builder: (_) => AnotacaoScreen(id: pet.id.toString())
                           ),
                         );
                       },

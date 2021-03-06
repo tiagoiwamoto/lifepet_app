@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lifepet_app/screens/home_screen.dart';
-import 'package:lifepet_app/widgets/botao_animado.dart';
+import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/home/home_screen.dart';
+import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/login/components/botao_animado.dart';
 
 class LoginScreen extends StatefulWidget {
   @override

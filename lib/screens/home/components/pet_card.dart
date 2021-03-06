@@ -1,48 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:lifepet_app/models/pet_model.dart';
-import 'package:lifepet_app/screens/form_pet_screen.dart';
-import 'package:lifepet_app/screens/pet/perfil_pet_screen.dart';
-import 'package:lifepet_app/services/pet_service.dart';
+import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/pet/perfil_pet/perfil_pet_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class PetCard extends StatelessWidget {
 
-  PetService service = PetService();
-  List<Pet> pets = List();
+  final Pet pet;
 
-  HomeScreen(){
-    _getAllPets();
-  }
+
+  PetCard({this.pet});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: ListView.builder(
-        itemCount: pets.length,
-        itemBuilder: (context, index) {
-          return _petCard(context, index);
-        },
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (_) => FormPetScreen()),
-            );
-          },
-          label: Text("Cadastrar"),
-          icon: Icon(Icons.pets),
-          backgroundColor: Colors.redAccent),
-    );
-  }
-
-  Widget _petCard(BuildContext context, int index) {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(
-          MaterialPageRoute(
-              builder: (_) => PerfilPetScreen(id: pets[index].id)
-          )
+            MaterialPageRoute(
+                builder: (_) => PerfilPetScreen(id: pet.id.toString())
+            )
         );
       },
       child: Padding(
@@ -51,14 +25,14 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Hero(
-              tag: pets[index].id,
+              tag: pet.id,
               child: Container(
                 width: double.infinity,
                 height: 250,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     image: DecorationImage(
-                        image: AssetImage(pets[index].imageUrl),
+                        image: AssetImage(pet.imageUrl),
                         fit: BoxFit.cover)),
               ),
             ),
@@ -68,7 +42,7 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    pets[index].nome,
+                    pet.nome,
                     style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 24,
@@ -83,7 +57,7 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    pets[index].descricao,
+                    pet.descricao,
                     style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 16,
@@ -97,10 +71,5 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void _getAllPets(){
-    List list = service.getAllPets();
-    pets = list;
   }
 }

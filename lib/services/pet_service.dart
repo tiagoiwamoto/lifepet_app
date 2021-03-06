@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:lifepet_app/models/pet_model.dart';
+import 'package:lifepet_app/utils/db_util.dart';
 
 class PetService {
   final List<Pet> _petList = [];
@@ -20,7 +21,7 @@ class PetService {
         sexo: "Macho",
         cor: "Branco",
         bio: "Cachorra muito ciumento",
-        id: "1"));
+        id: 1));
   }
 
   List getAllPets(){
@@ -28,7 +29,7 @@ class PetService {
   }
 
   void addPet(Pet pet){
-    _petList.add(Pet(
+    final newPet = Pet(
       nome: pet.nome,
       bio: pet.bio,
       idade: pet.idade,
@@ -36,8 +37,8 @@ class PetService {
       descricao: pet.descricao,
       cor: pet.cor,
       imageUrl: 'assets/images/no-image.png',
-      id: Random().nextInt(100).toString()
-    ));
+    );
+    DbUtil.insertDate('pets', newPet.toMap());
   }
 
   Pet getPet(String id){

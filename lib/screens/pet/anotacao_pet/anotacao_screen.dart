@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lifepet_app/models/pet_anotacao.dart';
 import 'package:lifepet_app/models/pet_model.dart';
-import 'package:lifepet_app/screens/pet/form_anotacao_screen.dart';
+import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/pet/anotacao_pet/form_anotacao_pet/form_anotacao_screen.dart';
 import 'package:lifepet_app/services/pet_anotacao_service.dart';
 import 'package:lifepet_app/services/pet_service.dart';
-import 'package:lifepet_app/widgets/back_home.dart';
-import 'package:lifepet_app/widgets/custom_navbar.dart';
-import 'package:lifepet_app/widgets/hero_builder.dart';
-import 'package:lifepet_app/widgets/pet_text_style.dart';
+import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/components/back_home.dart';
+import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/components/custom_navbar.dart';
+import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/components/hero_builder.dart';
+import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/components/pet_text_style.dart';
 
 class AnotacaoScreen extends StatelessWidget {
   final String id;
@@ -57,7 +57,7 @@ class AnotacaoScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (_) => FormAnotacaoScreen(id: pet.id)),
+            MaterialPageRoute(builder: (_) => FormAnotacaoScreen(id: pet.id.toString())),
           );
         },
         child: Icon(

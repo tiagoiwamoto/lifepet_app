@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:lifepet_app/models/pet_model.dart';
-import 'package:lifepet_app/screens/home_screen.dart';
+import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/home/home_screen.dart';
 import 'package:lifepet_app/services/pet_service.dart';
 
 class FormPetScreen extends StatefulWidget {
@@ -122,7 +122,7 @@ class _FormPetScreenState extends State<FormPetScreen> {
                           cor: tmpCorPet
                         );
                         if (pet != null) {
-                          service.editPet(pet.id, newPet);
+                          service.editPet(pet.id.toString(), newPet);
                         }else{
                           service.addPet(newPet);
                         }

@@ -2,10 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lifepet_app/models/pet_model.dart';
 import 'package:lifepet_app/models/pet_remedio_model.dart';
-import 'package:lifepet_app/screens/pet/form_remedio_pet_screen.dart';
+import 'package:lifepet_app/screens/pet/remedio_pet/form_remedio_pet/form_remedio_pet_screen.dart';
 import 'package:lifepet_app/services/pet_service.dart';
 import 'package:lifepet_app/services/remedio_service.dart';
-import 'package:lifepet_app/widgets/custom_navbar.dart';
+
+import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/components/custom_navbar.dart';
 
 class RemedioScreen extends StatelessWidget {
 
@@ -82,7 +83,7 @@ class RemedioScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (_) => FormRemedioPetScreen(id: pet.id)),
+            MaterialPageRoute(builder: (_) => FormRemedioPetScreen(id: pet.id.toString())),
           );
         },
         child: Icon(

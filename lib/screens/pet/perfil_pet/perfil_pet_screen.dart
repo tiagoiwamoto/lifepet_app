@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lifepet_app/models/pet_model.dart';
-import 'package:lifepet_app/screens/form_pet_screen.dart';
+import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/pet/form_pet/form_pet_screen.dart';
+import 'package:lifepet_app/screens/pet/perfil_pet/components/cartao_info_pet.dart';
 import 'package:lifepet_app/services/pet_service.dart';
-import 'package:lifepet_app/widgets/custom_navbar.dart';
+import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/components/custom_navbar.dart';
 
 class PerfilPetScreen extends StatelessWidget {
 
@@ -12,41 +13,6 @@ class PerfilPetScreen extends StatelessWidget {
 
   PerfilPetScreen({this.id}){
    _getPet(id);
-  }
-
-  Widget _cartaoInfoPet(String label, String value) {
-    return Container(
-      margin: EdgeInsets.all(10),
-      width: 100,
-      decoration: BoxDecoration(
-        color: Color(0xFFF8F2F7),
-        borderRadius: BorderRadius.circular(20)
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            label,
-            style: TextStyle(
-              fontFamily: "Montserrat",
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: Colors.red
-            ),
-          ),
-          SizedBox(height: 8),
-          Text(
-            value,
-            style: TextStyle(
-                fontFamily: "Montserrat",
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: Colors.black
-            ),
-          ),
-        ],
-      ),
-    );
   }
 
   @override
@@ -124,10 +90,10 @@ class PerfilPetScreen extends StatelessWidget {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  _cartaoInfoPet('Id', pet.id.toString()),
-                  _cartaoInfoPet('Idade', pet.idade.toString()),
-                  _cartaoInfoPet('Sexo', pet.sexo.toString()),
-                  _cartaoInfoPet('Cor', pet.cor.toString()),
+                  CartaoInfoPet(label: 'Id', value: pet.id.toString()),
+                  CartaoInfoPet(label: 'Idade', value: pet.idade.toString()),
+                  CartaoInfoPet(label: 'Sexo', value: pet.sexo.toString()),
+                  CartaoInfoPet(label: 'Cor', value: pet.cor.toString()),
                 ],
               ),
             ),
@@ -151,7 +117,7 @@ class PerfilPetScreen extends StatelessWidget {
         onPressed: () {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
-              builder: (_) => FormPetScreen(id: pet.id)
+              builder: (_) => FormPetScreen(id: pet.id.toString())
             ),
           );
         },
