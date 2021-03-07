@@ -39,4 +39,9 @@ class DbUtil {
     final db = await database();
     return db.query(table, columns: columns, where: whereString, whereArgs: whereArgumento);
   }
+
+  static Future<void> editData(String table, Map<String, Object> dados, String whereString, List<dynamic> whereArgumento) async {
+    final db = await database();
+    await db.update(table, dados, where: whereString, whereArgs: whereArgumento);
+  }
 }

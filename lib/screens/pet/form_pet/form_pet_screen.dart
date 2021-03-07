@@ -6,10 +6,6 @@ import 'package:lifepet_app/services/pet_service.dart';
 
 class FormPetScreen extends StatefulWidget {
 
-  String id;
-
-  FormPetScreen({this.id});
-
   @override
   _FormPetScreenState createState() => _FormPetScreenState();
 
@@ -29,17 +25,6 @@ class _FormPetScreenState extends State<FormPetScreen> {
   @override
   void initState() {
     super.initState();
-    if(widget.id != null) {
-      _getPet(widget.id);
-    }
-    if (pet != null) {
-      _nomeController.text = pet.nome;
-      _bioController.text = pet.bio;
-      _idadeController.text = pet.idade.toString();
-      tmpSexoPet = pet.sexo;
-      _descricaoController.text = pet.descricao;
-      tmpCorPet = pet.cor;
-    }
   }
 
 
@@ -47,7 +32,7 @@ class _FormPetScreenState extends State<FormPetScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(pet != null ? "Edição do pet" : "Cadastro do pet"),
+        title: Text("Cadastro do pet"),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -121,11 +106,7 @@ class _FormPetScreenState extends State<FormPetScreen> {
                           descricao: _descricaoController.text,
                           cor: tmpCorPet
                         );
-                        if (pet != null) {
-                          // service.editPet(pet.id.toString(), newPet);
-                        }else{
-                          service.addPet(newPet);
-                        }
+                        service.addPet(newPet);
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
                             builder: (_) => HomeScreen()
@@ -143,9 +124,5 @@ class _FormPetScreenState extends State<FormPetScreen> {
         ),
       ),
     );
-  }
-
-  _getPet(String id){
-    // pet = service.getPet(id);
   }
 }

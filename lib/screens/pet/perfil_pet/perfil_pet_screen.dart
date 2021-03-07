@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lifepet_app/models/pet_model.dart';
+import 'package:lifepet_app/screens/pet/form_editar_pet/form_editar_pet_screen.dart';
 import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/pet/form_pet/form_pet_screen.dart';
 import 'package:lifepet_app/screens/pet/perfil_pet/components/cartao_info_pet.dart';
 import 'package:lifepet_app/services/pet_service.dart';
@@ -114,7 +115,7 @@ class _PerfilPetScreenState extends State<PerfilPetScreen> {
             floatingActionButton: FloatingActionButton(
               onPressed: () {
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (_) => FormPetScreen(id: pet.id.toString())),
+                  MaterialPageRoute(builder: (_) => FormEditarPetScreen(id: pet.id)),
                 );
               },
               child: Icon(
