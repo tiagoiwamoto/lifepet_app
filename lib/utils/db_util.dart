@@ -22,6 +22,17 @@ class DbUtil {
         cor VARCHAR(20),
         bio TEXT)
     """);
+    db.execute("""
+      CREATE TABLE IF NOT EXISTS remedios (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome VARCHAR(50),
+        data DATETIME,
+        pet INTEGER,
+        FOREIGN KEY (pet) REFERENCES pets (id) 
+        ON DELETE NO ACTION 
+        ON UPDATE NO ACTION
+      )
+    """);
   }
 
   static Future<void> insertData(String table, Map<String, Object> dados) async {
