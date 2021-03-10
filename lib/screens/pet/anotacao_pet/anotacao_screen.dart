@@ -10,63 +10,107 @@ import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/components/custom_n
 import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/components/hero_builder.dart';
 import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/components/pet_text_style.dart';
 
-class AnotacaoScreen extends StatelessWidget {
-  final String id;
+class AnotacaoScreen extends StatefulWidget {
+  final int id;
+
+  AnotacaoScreen({this.id});
+
+  @override
+  _AnotacaoScreenState createState() => _AnotacaoScreenState();
+
+}
+
+class _AnotacaoScreenState extends State<AnotacaoScreen> {
+
   final PetService petService = PetService();
   final PetAnotacaoService petAnotacaoService = PetAnotacaoService();
   List<PetAnotacao> anotacoes = List();
   Pet pet;
+  Future<Pet> _loadPet;
+  Future<List<PetAnotacao>> _loadAnotacoes;
 
-  AnotacaoScreen({this.id}) {
-    _getPet(id);
-    _getAnotacoes(id);
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _loadPet = _getPet(widget.id);
+    _loadAnotacoes = _getAnotacoes(widget.id);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Stack(
-            children: [
-              HeroBuilder(id: '1', image: 'assets/images/toichi.jpg'),
-              BackHome()
-            ],
-          ),
-          SizedBox(height: 20),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 40),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [PetTextStyle(text: "Anotações", type: "header")],
+    return FutureBuilder(
+      future: _loadPet,
+      builder: (BuildContext context, AsyncSnapshot snapshot){
+        if(snapshot.hasData){
+          pet = snapshot.data;
+          return Scaffold(
+            body: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Stack(
+                  children: [
+                    HeroBuilder(id: '1', image: 'assets/images/toichi.jpg'),
+                    BackHome()
+                  ],
+                ),
+                SizedBox(height: 20),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 40),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [PetTextStyle(text: "Anotações", type: "header")],
+                  ),
+                ),
+                FutureBuilder(
+                  future: _loadAnotacoes,
+                  builder: (BuildContext context, AsyncSnapshot snapshot){
+                    if(snapshot.hasData){
+                      anotacoes = snapshot.data;
+                      if(anotacoes.isEmpty){
+                        return Center(
+                          child: Text("Este pet não possui anotações"),
+                        );
+                      }
+                      return Expanded(
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            padding: EdgeInsets.all(10),
+                            itemCount: anotacoes.length,
+                            itemBuilder: (context, index) {
+                              return _anotacaoCard(context, index);
+                            }),
+                      );
+                    }else{
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  }
+                )
+              ],
             ),
-          ),
-          Expanded(
-            child: ListView.builder(
-                shrinkWrap: true,
-                padding: EdgeInsets.all(10),
-                itemCount: anotacoes.length,
-                itemBuilder: (context, index) {
-                  return _anotacaoCard(context, index);
-                }),
-          )
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (_) => FormAnotacaoScreen(id: pet.id.toString())),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => FormAnotacaoScreen(id: pet.id)),
+                );
+              },
+              child: Icon(
+                Icons.add,
+              ),
+              backgroundColor: Colors.deepOrangeAccent,
+            ),
+            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+            bottomNavigationBar: CustomNavbar(pet: pet, paginaAberta: 3),
           );
-        },
-        child: Icon(
-          Icons.add,
-        ),
-        backgroundColor: Colors.deepOrangeAccent,
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: CustomNavbar(pet: pet, paginaAberta: 3),
+        }else{
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      }
     );
   }
 
@@ -92,11 +136,11 @@ class AnotacaoScreen extends StatelessWidget {
     );
   }
 
-  void _getPet(String id) {
-    // pet = petService.getPet(id);
+  Future<Pet> _getPet(int id) async {
+    return await petService.getPet(id);
   }
 
-  void _getAnotacoes(String id) {
-    anotacoes = petAnotacaoService.getAnotacoesPet(id);
+  Future<List<PetAnotacao>> _getAnotacoes(int id) async {
+    return await petAnotacaoService.getAnotacoesPet(id);
   }
 }

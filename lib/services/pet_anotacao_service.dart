@@ -1,18 +1,20 @@
-import 'dart:math';
 
 import 'package:lifepet_app/models/pet_anotacao.dart';
 import 'package:lifepet_app/services/pet_service.dart';
+import 'package:lifepet_app/utils/db_util.dart';
 
 class PetAnotacaoService{
-  final List<PetAnotacao> _anotacoes = [];
   final PetService petService = PetService();
 
-  List<PetAnotacao> getAnotacoesPet(String petId){
-    return _anotacoes.where((element) => element.pet.id == petId).toList();
+  Future<List<PetAnotacao>> getAnotacoesPet(int id) async {
+    String whereString = "pet = ?";
+    List<dynamic> whereArgumento = [id];
+    List<String> colunas = ["id", "anotacao", "tags", "pet"];
+    final dataList = await DbUtil.getDataById('anotacoes', colunas, whereString, whereArgumento);
+    return dataList.map((anotacao) => PetAnotacao.fromMap(anotacao)).toList();
   }
 
-  void saveAnotacao(PetAnotacao anotacao){
-    anotacao.id = Random().nextInt(1000).toString();
-    _anotacoes.add(anotacao);
+  void saveAnotacao(PetAnotacao anotacao) async {
+    DbUtil.insertData('anotacoes', anotacao.toMap());
   }
 }
