@@ -10,69 +10,114 @@ import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/components/custom_n
 import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/components/hero_builder.dart';
 import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/components/pet_text_style.dart';
 
-class ConsultaScreen extends StatelessWidget {
-  final String id;
+class ConsultaScreen extends StatefulWidget {
+
+  final int id;
+
+  ConsultaScreen({this.id});
+
+  @override
+  _ConsultaScreenState createState() => _ConsultaScreenState();
+
+}
+
+class _ConsultaScreenState extends State<ConsultaScreen> {
+
   final PetService petService = PetService();
   final PetConsultaService petConsultaService = PetConsultaService();
   Pet pet;
   List<PetConsulta> consultas = List();
+  Future<Pet> _loadPet;
+  Future<List<PetConsulta>> _loadConsultas;
 
-  ConsultaScreen({this.id}) {
-    _getPet(id);
-    _getConsultas(id);
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _loadPet = _getPet(widget.id);
+    _loadConsultas = _getConsultas(widget.id);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            children: [
-              HeroBuilder(id: pet.id.toString(), image: pet.imageUrl),
-              BackHome()
-            ],
-          ),
-          SizedBox(height: 20),
-          Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [PetTextStyle(text: "Consultas", type: "header")],
-              )),
-          Expanded(
-            child: ListView.builder(
-                padding: EdgeInsets.all(10),
-                itemCount: consultas.length,
-                itemBuilder: (context, index) {
-                  return _consultaCard(context, index);
-                }),
-          )
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (_) => FormConsultaPetScreen(id: pet.id.toString())),
+    return FutureBuilder(
+      future: _loadPet,
+      builder: (BuildContext context, AsyncSnapshot snapshot){
+        if(snapshot.hasData){
+          pet = snapshot.data;
+          return Scaffold(
+            body: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Stack(
+                  children: [
+                    HeroBuilder(id: pet.id.toString(), image: pet.imageUrl),
+                    BackHome()
+                  ],
+                ),
+                SizedBox(height: 20),
+                Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 40),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [PetTextStyle(text: "Consultas", type: "header")],
+                    )),
+                FutureBuilder(
+                  future: _loadConsultas,
+                  builder: (BuildContext context, AsyncSnapshot snapshot){
+                    if(snapshot.hasData){
+                      consultas = snapshot.data;
+                      if(consultas.isEmpty){
+                        return Center(
+                          child: Text("Este pet não possui consultas"),
+                        );
+                      }
+                      return Expanded(
+                        child: ListView.builder(
+                            padding: EdgeInsets.all(10),
+                            itemCount: consultas.length,
+                            itemBuilder: (context, index) {
+                              return _consultaCard(context, index);
+                            }),
+                      );
+                    }else{
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  }
+                )
+              ],
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => FormConsultaPetScreen(id: pet.id)),
+                );
+              },
+              child: Icon(
+                Icons.add,
+              ),
+              backgroundColor: Colors.indigo,
+            ),
+            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+            bottomNavigationBar: CustomNavbar(pet: pet, paginaAberta: 2),
           );
-        },
-        child: Icon(
-          Icons.add,
-        ),
-        backgroundColor: Colors.indigo,
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: CustomNavbar(pet: pet, paginaAberta: 2),
+        }else{
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
     );
   }
 
-  void _getPet(String id) {
-    // pet = petService.getPet(id);
+  Future<Pet> _getPet(int id) async {
+    return await petService.getPet(id);
   }
 
-  void _getConsultas(String id) {
-    consultas = petConsultaService.getConsultasPet(id);
+  Future<List<PetConsulta>> _getConsultas(int id) async {
+    return await petConsultaService.getConsultasPet(id);
   }
 
   Widget _consultaCard(BuildContext context, int index) {
@@ -92,7 +137,12 @@ class ConsultaScreen extends StatelessWidget {
           consultas[index].nome,
           style: TextStyle(fontWeight: FontWeight.w400),
         ),
-        subtitle: Text(consultas[index].descricao),
+        subtitle: Text(
+          """
+${consultas[index].descricao}
+${consultas[index].data}
+          """
+        ),
       ),
     );
   }

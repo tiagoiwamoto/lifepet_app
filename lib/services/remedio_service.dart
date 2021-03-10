@@ -5,7 +5,7 @@ import 'package:lifepet_app/services/pet_service.dart';
 import 'package:lifepet_app/utils/db_util.dart';
 
 class RemedioService {
-  final List<Remedio> _remedioList = [];
+
   final PetService petService = PetService();
 
   Future<List> getRemediosPet(int id) async {

@@ -33,6 +33,29 @@ class DbUtil {
         ON UPDATE NO ACTION
       )
     """);
+    db.execute("""
+      CREATE TABLE IF NOT EXISTS consultas (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome VARCHAR(50),
+        descricao TEXT,
+        data DATETIME,
+        pet INTEGER,
+        FOREIGN KEY (pet) REFERENCES pets (id) 
+        ON DELETE NO ACTION 
+        ON UPDATE NO ACTION
+      )
+    """);
+    db.execute("""
+      CREATE TABLE IF NOT EXISTS anotacoes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        anotacao TEXT,
+        tags TEXT,
+        pet INTEGER,
+        FOREIGN KEY (pet) REFERENCES pets (id) 
+        ON DELETE NO ACTION 
+        ON UPDATE NO ACTION
+      )
+    """);
   }
 
   static Future<void> insertData(String table, Map<String, Object> dados) async {
