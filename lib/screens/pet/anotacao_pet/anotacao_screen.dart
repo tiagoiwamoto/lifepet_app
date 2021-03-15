@@ -51,7 +51,7 @@ class _AnotacaoScreenState extends State<AnotacaoScreen> {
               children: [
                 Stack(
                   children: [
-                    HeroBuilder(id: '1', image: 'assets/images/toichi.jpg'),
+                    HeroBuilder(id: pet.id.toString(), image: pet.imageUrl),
                     BackHome()
                   ],
                 ),
