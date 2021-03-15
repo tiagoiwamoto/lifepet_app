@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:lifepet_app/models/pet_model.dart';
-import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/home/home_screen.dart';
+import 'package:lifepet_app/screens/home/home_screen.dart';
 import 'package:lifepet_app/services/pet_service.dart';
 
 class FormEditarPetScreen extends StatefulWidget {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lifepet_app/models/pet_consulta_model.dart';
 import 'package:lifepet_app/models/pet_model.dart';
-import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/pet/consulta_pet/consulta_screen.dart';
+import 'package:lifepet_app/screens/pet/consulta_pet/consulta_screen.dart';
 import 'package:lifepet_app/services/pet_consulta_service.dart';
 import 'package:lifepet_app/services/pet_service.dart';
-import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/components/app_bar_widget.dart';
+import 'package:lifepet_app/screens/components/app_bar_widget.dart';
 
 class FormConsultaPetScreen extends StatefulWidget {
 

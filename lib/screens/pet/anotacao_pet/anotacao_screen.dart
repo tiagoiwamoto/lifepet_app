@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lifepet_app/models/pet_anotacao.dart';
 import 'package:lifepet_app/models/pet_model.dart';
-import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/pet/anotacao_pet/form_anotacao_pet/form_anotacao_screen.dart';
+import 'package:lifepet_app/screens/pet/anotacao_pet/form_anotacao_pet/form_anotacao_screen.dart';
 import 'package:lifepet_app/services/pet_anotacao_service.dart';
 import 'package:lifepet_app/services/pet_service.dart';
-import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/components/back_home.dart';
-import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/components/custom_navbar.dart';
-import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/components/hero_builder.dart';
-import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/components/pet_text_style.dart';
+import 'package:lifepet_app/screens/components/back_home.dart';
+import 'package:lifepet_app/screens/components/custom_navbar.dart';
+import 'package:lifepet_app/screens/components/hero_builder.dart';
+import 'package:lifepet_app/screens/components/pet_text_style.dart';
 
 class AnotacaoScreen extends StatefulWidget {
   final int id;

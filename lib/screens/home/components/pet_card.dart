@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lifepet_app/models/pet_model.dart';
-import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/pet/perfil_pet/perfil_pet_screen.dart';
+import 'package:lifepet_app/screens/pet/perfil_pet/perfil_pet_screen.dart';
 
 class PetCard extends StatelessWidget {
 

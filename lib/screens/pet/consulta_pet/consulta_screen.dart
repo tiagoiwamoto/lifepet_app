@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lifepet_app/models/pet_consulta_model.dart';
 import 'package:lifepet_app/models/pet_model.dart';
-import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/pet/consulta_pet/form_consulta_pet/form_consulta_screen.dart';
+import 'package:lifepet_app/screens/pet/consulta_pet/form_consulta_pet/form_consulta_screen.dart';
 import 'package:lifepet_app/services/pet_consulta_service.dart';
 import 'package:lifepet_app/services/pet_service.dart';
-import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/components/back_home.dart';
-import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/components/custom_navbar.dart';
-import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/components/hero_builder.dart';
-import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/components/pet_text_style.dart';
+import 'package:lifepet_app/screens/components/back_home.dart';
+import 'package:lifepet_app/screens/components/custom_navbar.dart';
+import 'package:lifepet_app/screens/components/hero_builder.dart';
+import 'package:lifepet_app/screens/components/pet_text_style.dart';
 
 class ConsultaScreen extends StatefulWidget {
 

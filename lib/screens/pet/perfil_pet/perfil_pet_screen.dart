@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lifepet_app/models/pet_model.dart';
 import 'package:lifepet_app/screens/pet/form_editar_pet/form_editar_pet_screen.dart';
-import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/pet/form_pet/form_pet_screen.dart';
+import 'package:lifepet_app/screens/pet/form_pet/form_pet_screen.dart';
 import 'package:lifepet_app/screens/pet/perfil_pet/components/cartao_info_pet.dart';
 import 'package:lifepet_app/services/pet_service.dart';
-import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/components/custom_navbar.dart';
+import 'package:lifepet_app/screens/components/custom_navbar.dart';
 
 class PerfilPetScreen extends StatefulWidget {
   final int id;

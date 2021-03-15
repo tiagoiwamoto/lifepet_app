@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lifepet_app/models/pet_model.dart';
-import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/pet/anotacao_pet/anotacao_screen.dart';
-import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/pet/consulta_pet/consulta_screen.dart';
-import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/pet/perfil_pet/perfil_pet_screen.dart';
-import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/pet/remedio_pet/remedio_screen.dart';
+import 'package:lifepet_app/screens/pet/anotacao_pet/anotacao_screen.dart';
+import 'package:lifepet_app/screens/pet/consulta_pet/consulta_screen.dart';
+import 'package:lifepet_app/screens/pet/perfil_pet/perfil_pet_screen.dart';
+import 'package:lifepet_app/screens/pet/remedio_pet/remedio_screen.dart';
 
 class CustomNavbar extends StatefulWidget {
 

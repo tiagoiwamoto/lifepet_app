@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/login/login_screen.dart';
+import 'package:lifepet_app/screens/login/login_screen.dart';
 
 void main() => runApp(Main());
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lifepet_app/models/pet_anotacao.dart';
 import 'package:lifepet_app/models/pet_model.dart';
-import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/pet/anotacao_pet/anotacao_screen.dart';
+import 'package:lifepet_app/screens/pet/anotacao_pet/anotacao_screen.dart';
 import 'package:lifepet_app/services/pet_anotacao_service.dart';
 import 'package:lifepet_app/services/pet_service.dart';
-import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/components/app_bar_widget.dart';
+import 'package:lifepet_app/screens/components/app_bar_widget.dart';
 
 class FormAnotacaoScreen extends StatefulWidget {
 

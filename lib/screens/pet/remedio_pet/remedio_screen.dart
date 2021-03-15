@@ -6,7 +6,7 @@ import 'package:lifepet_app/screens/pet/remedio_pet/form_remedio_pet/form_remedi
 import 'package:lifepet_app/services/pet_service.dart';
 import 'package:lifepet_app/services/remedio_service.dart';
 
-import 'file:///W:/Workspace/flutter/lifepet_app/lib/screens/components/custom_navbar.dart';
+import 'package:lifepet_app/screens/components/custom_navbar.dart';
 
 class RemedioScreen extends StatefulWidget {
   final int id;
