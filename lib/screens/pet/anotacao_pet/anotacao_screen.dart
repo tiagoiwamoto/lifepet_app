@@ -141,6 +141,7 @@ class _AnotacaoScreenState extends State<AnotacaoScreen> {
   }
 
   Future<List<PetAnotacao>> _getAnotacoes(int id) async {
-    return await petAnotacaoService.getAnotacoesPet(id);
+    // return await petAnotacaoService.getAnotacoesPet(id);
+    return await petAnotacaoService.getAnotacoesPetFromFile(id);
   }
 }

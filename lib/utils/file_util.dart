@@ -8,11 +8,14 @@ class FileUtil {
 
   static Future<File> getFile(String entidade) async {
     final directory = await getApplicationDocumentsDirectory();
-    return File("${directory.path}/$entidade.json");
+    final String path = "${directory.path}/$entidade.json";
+    if(await File(path).exists() == false){
+      await File(path).create();
+    }
+    return File(path);
   }
 
   static Future<void> insertData(String entidade, Map<String, Object> dados) async {
-
     String data = json.encode(dados);
     final file = await getFile(entidade);
     file.writeAsString(data + '\n', mode: FileMode.append);

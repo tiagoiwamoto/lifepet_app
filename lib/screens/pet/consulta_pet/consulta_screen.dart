@@ -117,8 +117,8 @@ class _ConsultaScreenState extends State<ConsultaScreen> {
   }
 
   Future<List<PetConsulta>> _getConsultas(int id) async {
-    return await petConsultaService.getConsultasPet(id);
-    // return await petConsultaService.getConsultasPetFromFile(id);
+    // return await petConsultaService.getConsultasPet(id);
+    return await petConsultaService.getConsultasPetFromFile(id);
   }
 
   Widget _consultaCard(BuildContext context, int index) {
