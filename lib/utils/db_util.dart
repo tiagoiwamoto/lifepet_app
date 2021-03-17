@@ -78,4 +78,9 @@ class DbUtil {
     final db = await database();
     await db.update(table, dados, where: whereString, whereArgs: whereArgumento);
   }
+
+  static Future<void> removeData(String table, String whereString, List<dynamic> whereArgumento) async {
+    final db = await database();
+    await db.delete(table, where: whereString, whereArgs: whereArgumento);
+  }
 }

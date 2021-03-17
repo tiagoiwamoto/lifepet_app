@@ -26,4 +26,14 @@ class FileUtil {
     return file.readAsLines();
   }
 
+  static Future<void> removeData(String entidade, int index) async {
+    final file = await getFile(entidade);
+    file.readAsLines().then((List<String> lines){
+      lines.removeAt(index);
+      lines.add('');
+      final newText = lines.join('\n');
+      file.writeAsString(newText);
+    });
+  }
+
 }

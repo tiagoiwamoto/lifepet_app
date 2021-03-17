@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lifepet_app/models/pet_anotacao.dart';
 import 'package:lifepet_app/models/pet_model.dart';
 import 'package:lifepet_app/screens/pet/anotacao_pet/form_anotacao_pet/form_anotacao_screen.dart';
+import 'package:lifepet_app/screens/pet/perfil_pet/perfil_pet_screen.dart';
 import 'package:lifepet_app/services/pet_anotacao_service.dart';
 import 'package:lifepet_app/services/pet_service.dart';
 import 'package:lifepet_app/screens/components/back_home.dart';
@@ -115,24 +116,63 @@ class _AnotacaoScreenState extends State<AnotacaoScreen> {
   }
 
   Widget _anotacaoCard(BuildContext context, int index) {
-    return Card(
-      elevation: 8.0,
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      child: ListTile(
-        contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        leading: Container(
-          padding: EdgeInsets.only(right: 12),
-          decoration: BoxDecoration(
-              border: Border(
-                  right: BorderSide(width: 1.0, color: Colors.redAccent))),
-          child: Icon(Icons.event_note, color: Colors.redAccent),
+    return GestureDetector(
+      onTap: () {
+        _exibirDialog(context, anotacoes[index]);
+      },
+      child: Card(
+        elevation: 8.0,
+        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        child: ListTile(
+          contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          leading: Container(
+            padding: EdgeInsets.only(right: 12),
+            decoration: BoxDecoration(
+                border: Border(
+                    right: BorderSide(width: 1.0, color: Colors.redAccent))),
+            child: Icon(Icons.event_note, color: Colors.redAccent),
+          ),
+          title: Text(
+            anotacoes[index].anotacao,
+            style: TextStyle(fontWeight: FontWeight.w400),
+          ),
+          subtitle: Text(anotacoes[index].tags),
         ),
-        title: Text(
-          anotacoes[index].anotacao,
-          style: TextStyle(fontWeight: FontWeight.w400),
-        ),
-        subtitle: Text(anotacoes[index].tags),
       ),
+    );
+  }
+  
+  void _exibirDialog(BuildContext context, PetAnotacao anotacao) {
+    Widget cancelaButton = FlatButton(
+      child: Text("Cancelar"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+    Widget removerButton = FlatButton(
+      child: Text("Remover"),
+      onPressed: () {
+        petAnotacaoService.deleteAnotacaoPet(anotacao.id);
+        // petAnotacaoService.removeAnotacaoPetFromFile(anotacao.id);
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (_) => PerfilPetScreen(id: anotacao.pet)
+          )
+        );
+      },
+    );
+    AlertDialog alert = AlertDialog(
+      title: Text("Remover anotação"),
+      content: Text("Deseja remover a anotação ?"),
+      actions: [
+        cancelaButton, removerButton
+      ],
+    );
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alert;
+        }
     );
   }
 
@@ -141,7 +181,7 @@ class _AnotacaoScreenState extends State<AnotacaoScreen> {
   }
 
   Future<List<PetAnotacao>> _getAnotacoes(int id) async {
-    // return await petAnotacaoService.getAnotacoesPet(id);
-    return await petAnotacaoService.getAnotacoesPetFromFile(id);
+    return await petAnotacaoService.getAnotacoesPet(id);
+    // return await petAnotacaoService.getAnotacoesPetFromFile(id);
   }
 }

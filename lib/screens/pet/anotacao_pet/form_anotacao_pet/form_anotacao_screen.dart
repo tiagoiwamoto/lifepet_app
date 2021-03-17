@@ -70,8 +70,8 @@ class _FormAnotacaoScreenState extends State<FormAnotacaoScreen> {
                                   anotacao: _anotacaoController.text,
                                   tags: _tagsController.text
                               );
-                              // petAnotacaoService.saveAnotacao(novaAnotacao);
-                              petAnotacaoService.saveAnotacaoOnFile(novaAnotacao);
+                              petAnotacaoService.saveAnotacao(novaAnotacao);
+                              // petAnotacaoService.saveAnotacaoOnFile(novaAnotacao);
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
                                     builder: (_) => AnotacaoScreen(id: pet.id)

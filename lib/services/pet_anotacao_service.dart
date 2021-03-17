@@ -9,6 +9,7 @@ import 'package:lifepet_app/utils/file_util.dart';
 
 class PetAnotacaoService{
   final PetService petService = PetService();
+  int indexRemover;
 
   Future<List<PetAnotacao>> getAnotacoesPet(int id) async {
     String whereString = "pet = ?";
@@ -20,6 +21,12 @@ class PetAnotacaoService{
 
   void saveAnotacao(PetAnotacao anotacao) async {
     DbUtil.insertData('anotacoes', anotacao.toMap());
+  }
+
+  void deleteAnotacaoPet(int id) async {
+    String whereString = "id = ?";
+    List<dynamic> whereArgumento = [id];
+    await DbUtil.removeData('anotacoes', whereString, whereArgumento);
   }
 
   void saveAnotacaoOnFile(PetAnotacao anotacao) async {
@@ -43,5 +50,14 @@ class PetAnotacaoService{
     });
     anotacaoList = List();
     return petConsultas;
+  }
+
+  Future<void> removeAnotacaoPetFromFile(int id) async {
+    String idString = id.toString();
+    final dataList = await FileUtil.getDataFromFile('anotacao');
+    List<PetAnotacaoFileModel> anotacaoList =
+    dataList.map((anotacoes) => PetAnotacaoFileModel.fromJson(jsonDecode(anotacoes))).toList();
+    indexRemover = anotacaoList.indexWhere((anotacao) => anotacao.id == idString);
+    FileUtil.removeData('anotacao', indexRemover);
   }
 }
