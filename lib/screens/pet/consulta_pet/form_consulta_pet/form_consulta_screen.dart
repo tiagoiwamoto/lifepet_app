@@ -84,8 +84,8 @@ class _FormConsultaPetScreenState extends State<FormConsultaPetScreen> {
                                   data: selectedDate.toString(),
                                   descricao: _descricaoController.text
                               );
-                              // petConsultaService.saveConsulta(novaConsulta);
-                              petConsultaService.saveConsultaOnFile(novaConsulta);
+                              petConsultaService.saveConsulta(novaConsulta);
+                              // petConsultaService.saveConsultaOnFile(novaConsulta);
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
                                     builder: (_) => ConsultaScreen(id: pet.id)

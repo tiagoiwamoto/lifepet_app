@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lifepet_app/models/pet_consulta_model.dart';
 import 'package:lifepet_app/models/pet_model.dart';
 import 'package:lifepet_app/screens/pet/consulta_pet/form_consulta_pet/form_consulta_screen.dart';
+import 'package:lifepet_app/screens/pet/perfil_pet/perfil_pet_screen.dart';
 import 'package:lifepet_app/services/pet_consulta_service.dart';
 import 'package:lifepet_app/services/pet_service.dart';
 import 'package:lifepet_app/screens/components/back_home.dart';
@@ -117,34 +118,73 @@ class _ConsultaScreenState extends State<ConsultaScreen> {
   }
 
   Future<List<PetConsulta>> _getConsultas(int id) async {
-    // return await petConsultaService.getConsultasPet(id);
-    return await petConsultaService.getConsultasPetFromFile(id);
+    return await petConsultaService.getConsultasPet(id);
+    // return await petConsultaService.getConsultasPetFromFile(id);
   }
 
   Widget _consultaCard(BuildContext context, int index) {
-    return Card(
-      elevation: 8.0,
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      child: ListTile(
-        contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        leading: Container(
-          padding: EdgeInsets.only(right: 12),
-          decoration: BoxDecoration(
-              border: Border(
-                  right: BorderSide(width: 1.0, color: Colors.redAccent))),
-          child: Icon(Icons.assignment_rounded, color: Colors.redAccent),
-        ),
-        title: Text(
-          consultas[index].nome,
-          style: TextStyle(fontWeight: FontWeight.w400),
-        ),
-        subtitle: Text(
-          """
+    return GestureDetector(
+      onTap: () {
+        _exibirDialog(context, consultas[index]);
+      },
+      child: Card(
+        elevation: 8.0,
+        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        child: ListTile(
+          contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          leading: Container(
+            padding: EdgeInsets.only(right: 12),
+            decoration: BoxDecoration(
+                border: Border(
+                    right: BorderSide(width: 1.0, color: Colors.redAccent))),
+            child: Icon(Icons.assignment_rounded, color: Colors.redAccent),
+          ),
+          title: Text(
+            consultas[index].nome,
+            style: TextStyle(fontWeight: FontWeight.w400),
+          ),
+          subtitle: Text(
+            """
 ${consultas[index].descricao}
 ${consultas[index].data}
-          """
+            """
+          ),
         ),
       ),
+    );
+  }
+
+  void _exibirDialog(BuildContext context, PetConsulta consulta) {
+    Widget cancelaButton = FlatButton(
+      child: Text("Cancelar"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+    Widget removerButton = FlatButton(
+      child: Text("Remover"),
+      onPressed: () {
+        petConsultaService.deleteConsultaPet(consulta.id);
+        // petConsultaService.removeConsultaPetFromFile(consulta.id);
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+                builder: (_) => PerfilPetScreen(id: consulta.pet)
+            )
+        );
+      },
+    );
+    AlertDialog alert = AlertDialog(
+      title: Text("Remover consulta"),
+      content: Text("Deseja remover a consulta ?"),
+      actions: [
+        cancelaButton, removerButton
+      ],
+    );
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alert;
+        }
     );
   }
 }
