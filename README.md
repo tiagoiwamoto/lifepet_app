@@ -1,7 +1,11 @@
-# lifepet_app
+### lifepet_app
 
-Aplicação para gerenciar a vida do seu pet
+    Aplicação para gerenciar a vida do seu pet
+    
+### Demo
+![Run 001](docs/screenshots/preview.gif)
 
+### Screenshots
 ![Screenshot 001](docs/screenshots/001.png)
 ![Screenshot 002](docs/screenshots/002.png)
 ![Screenshot 003](docs/screenshots/003.png)
